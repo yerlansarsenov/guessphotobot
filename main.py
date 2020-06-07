@@ -1,0 +1,75 @@
+import telebot
+import time
+import requests
+import random
+from flask import Flask, request
+
+TOKEN = '1187434462:AAHpK1t0-sBlFnuLMhAIgEZcOORf_EtUn3g'
+
+URL = 'https://ruslan94.pythonanywhere.com/'
+
+# app = Flask(__name__)
+
+bot = telebot.TeleBot(TOKEN)
+#
+# bot.remove_webhook()
+# bot.set_webhook(URL)
+
+# @app.route('/', methods=['POST'])
+# def webhook():
+#     update = telebot.types.Update.de_json(request.stream.read().decode('utf-8'))
+#     bot.process_new_updates([update])
+#     return 'ok', 200
+
+def reqyan(url):
+    # r = requests.request('GET', url='https://yandex.kz/images/search?source=collections&rpt=imageview&url='+url)
+    r = requests.get(url='https://yandex.com/images/search?source=collections&rpt=imageview&url='+url)
+    # print(r.json())
+    print(r.text)
+    return r
+
+def getphotourl(file_id):
+    r = requests.get(f'https://api.telegram.org/bot{TOKEN}/getFile?file_id={file_id}')
+    return r.json()
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.send_message(message.chat.id, 'Привет! Отправь мне фото, а я угадаю что там изображено')
+
+@bot.message_handler(content_types=['photo'])
+def sendedphoto(message):
+    get = getphotourl(message.photo[0].file_id)
+    file_path = get['result']['file_path']
+    path = f'https://api.telegram.org/file/bot{TOKEN}/{file_path}'
+    print(path)
+    reqjson = reqyan(path)
+    text = reqjson.text
+    print(text)
+    span = '<span class="Button2-Text">'
+    i = text.find(span)
+    x = text[(i + len(span)):]
+    j = x.find('<')
+    answer = x[:j]
+    # url = 'https://yandex.kz/images/search?source=collections&rpt=imageview&url=' + path
+    # bot.send_message(message.chat.id, 'OK, got it, one second, please')
+    guesstext = [
+        'Я думаю, что это ',
+        'Мне кажется, что это ',
+        'Здесь я вижу '
+    ]
+    bot.send_message(message.chat.id, guesstext[random.randint(0, 2)] + answer)
+
+@bot.message_handler(content_types=['text', 'audio', 'video', 'sticker', 'document'])
+def iftext(message):
+    bot.send_message(message.chat.id, 'Просто отправь мне фото :)')
+
+
+
+############# polling
+while True:
+    try:
+        bot.polling(none_stop=True)
+    except:
+        time.sleep(10)
+#
+###############################
