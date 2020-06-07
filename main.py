@@ -35,7 +35,7 @@ def getphotourl(file_id):
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.chat.id, 'Привет! Отправь мне фото, а я угадаю что там изображено')
-    bot.send_message(689642806, 'id: ' + message.chat.id + ', username: ' + message.chat.username + ' started bot')
+    bot.send_message(689642806, 'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + ' started bot')
 
 
 @bot.message_handler(content_types=['photo'])
@@ -65,7 +65,7 @@ def sendedphoto(message):
 @bot.message_handler(content_types=['text', 'audio', 'video', 'sticker', 'document'])
 def iftext(message):
     bot.send_message(message.chat.id, 'Просто отправь мне фото :)')
-    bot.send_message(689642806, 'id: ' + message.chat.id + ', username: ' + message.chat.username + ' sended smthg')
+    bot.send_message(689642806, 'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + ' sended smthg')
 
 
 
