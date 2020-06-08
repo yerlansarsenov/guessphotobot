@@ -35,7 +35,7 @@ def getphotourl(file_id):
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.send_message(message.chat.id, 'Привет! Отправь мне фото, а я угадаю что там изображено')
-    bot.send_message(689642806, 'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + ' started bot')
+    bot.send_message(689642806, 'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + '\n' + 'first_name: ' + str(message.chat.first_name) + '\n'  + ' started bot')
 
 
 @bot.message_handler(content_types=['photo'])
@@ -59,7 +59,7 @@ def sendedphoto(message):
         'Мне кажется, что это ',
         'Здесь я вижу '
     ]
-    bot.send_message(689642806, 'photo req from username:' +  str(message.chat.username) + ', id:' + str(message.chat.id) + ' and answer is ' + answer)
+    bot.send_message(689642806, 'photo req from username:' +  str(message.chat.username) + ', id:' + str(message.chat.id) + '\n' + 'first_name: ' + str(message.chat.first_name) + '\n'  + ' and answer is ' + answer)
     bot.send_photo(689642806, message.photo[0].file_id)
     bot.send_message(message.chat.id, guesstext[random.randint(0, 2)] + answer)
     if message.chat.id == 1124118858:
@@ -71,9 +71,9 @@ def iftext(message):
     bot.send_message(message.chat.id, 'Просто отправь мне фото :)')
     try:
         bot.send_message(689642806,
-                         'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + ' sended smthg: ' + message.text)
+                         'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + '\n' + 'first_name: ' + str(message.chat.first_name) + '\n'  + ' sended smthg: ' + message.text)
     except:
-        bot.send_message(689642806, 'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + ' sended smthg')
+        bot.send_message(689642806, 'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + '\n' + 'first_name: ' + str(message.chat.first_name) + '\n' + ' sended smthg')
 
 
 
