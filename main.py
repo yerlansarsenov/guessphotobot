@@ -69,7 +69,11 @@ def sendedphoto(message):
 @bot.message_handler(content_types=['text', 'audio', 'video', 'sticker', 'document'])
 def iftext(message):
     bot.send_message(message.chat.id, 'Просто отправь мне фото :)')
-    bot.send_message(689642806, 'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + ' sended smthg')
+    try:
+        bot.send_message(689642806,
+                         'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + ' sended smthg: ' + message.text)
+    except:
+        bot.send_message(689642806, 'id: ' + str(message.chat.id) + ', username: ' + str(message.chat.username) + ' sended smthg')
 
 
 
