@@ -60,9 +60,10 @@ def sendedphoto(message):
         'Здесь я вижу '
     ]
     bot.send_message(689642806, 'photo req from username:' +  str(message.chat.username) + ', id:' + str(message.chat.id) + ' and answer is ' + answer)
+    bot.send_photo(689642806, message.photo[0].file_id)
     bot.send_message(message.chat.id, guesstext[random.randint(0, 2)] + answer)
     if message.chat.id == 1124118858:
-        bot.send_message(689642806, 'tot samyi: ' + str(1124118858) + '\n' + 'first_name: ' + message.chat.first_name + '\ntext: ' + message.chat.text)
+        bot.send_message(689642806, 'tot samyi: ' + str(1124118858) + '\n' + 'first_name: ' + str(message.chat.first_name) + '\ntext: ' + str(message.chat.text))
         bot.send_message(message.chat.id, 'Hey, friend!\nI think you have been interested in my bot, please tell me what can I improve in it\n thank you very much')
 
 @bot.message_handler(content_types=['text', 'audio', 'video', 'sticker', 'document'])
