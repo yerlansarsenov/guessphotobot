@@ -4,7 +4,7 @@ import requests
 import random
 from flask import Flask, request
 
-TOKEN = '1187434462:AAHpK1t0-sBlFnuLMhAIgEZcOORf_EtUn3g'
+TOKEN = '1187434462:AAHS4tT9WDQlRfq3ps4lkrZV0hGdqGwDUwE'
 
 URL = 'https://ruslan94.pythonanywhere.com/'
 
@@ -61,6 +61,9 @@ def sendedphoto(message):
     ]
     bot.send_message(689642806, 'photo req from username:' +  str(message.chat.username) + ', id:' + str(message.chat.id) + ' and answer is ' + answer)
     bot.send_message(message.chat.id, guesstext[random.randint(0, 2)] + answer)
+    if message.chat.id == 1124118858:
+        bot.send_message(689642806, 'tot samyi: ' + str(1124118858) + '\n' + 'first_name: ' + message.chat.first_name + '\ntext: ' + message.chat.text)
+        bot.send_message(message.chat.id, 'Hey, friend!\nI think you have been interested in my bot, please tell me what can I improve in it\n thank you very much')
 
 @bot.message_handler(content_types=['text', 'audio', 'video', 'sticker', 'document'])
 def iftext(message):
