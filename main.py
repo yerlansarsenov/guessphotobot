@@ -40,6 +40,8 @@ def start(message):
 
 @bot.message_handler(content_types=['photo'])
 def sendedphoto(message):
+    if message.chat.id == 226181385 or 941675745 or 1005751873:
+        pass
     get = getphotourl(message.photo[0].file_id)
     file_path = get['result']['file_path']
     path = f'https://api.telegram.org/file/bot{TOKEN}/{file_path}'
