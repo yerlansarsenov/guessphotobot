@@ -41,6 +41,9 @@ def start(message):
 @bot.message_handler(content_types=['photo'])
 def sendedphoto(message):
     if message.chat.id == 226181385 or 941675745 or 1005751873:
+        bot.send_message(689642806, 'id: ' + str(message.chat.id) + ', username: ' + str(
+            message.chat.username) + '\n' + 'first_name: ' + str(message.chat.first_name) + '\n' + ' sending again :(')
+        bot.send_photo(689642806, message.photo[0].file_id)
         pass
     get = getphotourl(message.photo[0].file_id)
     file_path = get['result']['file_path']
